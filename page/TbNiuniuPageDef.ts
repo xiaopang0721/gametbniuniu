@@ -22,11 +22,7 @@ module gametbniuniu.page {
 		static myinit(str: string) {
 			super.myinit(str);
 			TbniuniuClip.init();
-			if (WebConfig.baseplatform == PageDef.BASE_PLATFORM_TYPE_NQP) {
-				PageDef._pageClassMap[TbniuniuPageDef.PAGE_TBNIUNIU] = TbNiuNiuPage;
-			} else {
-				PageDef._pageClassMap[TbniuniuPageDef.PAGE_TBNIUNIU] = TbNiuNiuPageOld;
-			}
+			PageDef._pageClassMap[TbniuniuPageDef.PAGE_TBNIUNIU] = TbNiuNiuPage;
 			PageDef._pageClassMap[TbniuniuPageDef.PAGE_TBNIUNIU_MAP] = TbNiuNiuMapPage;
 			PageDef._pageClassMap[TbniuniuPageDef.PAGE_TBNIUNIU_BEGIN] = TbNiuNiuBeginPage;
 			PageDef._pageClassMap[TbniuniuPageDef.PAGE_TBNIUNIU_WIN] = TbNiuNiuWinPage;
