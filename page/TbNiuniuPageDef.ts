@@ -22,11 +22,7 @@ module gametbniuniu.page {
 		static myinit(str: string) {
 			super.myinit(str);
 			TbniuniuClip.init();
-			if (WebConfig.baseplatform == PageDef.BASE_PLATFORM_TYPE_NQP) {
-				PageDef._pageClassMap[TbniuniuPageDef.PAGE_TBNIUNIU] = TbNiuNiuPage;
-			} else {
-				PageDef._pageClassMap[TbniuniuPageDef.PAGE_TBNIUNIU] = TbNiuNiuPageOld;
-			}
+			PageDef._pageClassMap[TbniuniuPageDef.PAGE_TBNIUNIU] = TbNiuNiuPage;
 			PageDef._pageClassMap[TbniuniuPageDef.PAGE_TBNIUNIU_MAP] = TbNiuNiuMapPage;
 			PageDef._pageClassMap[TbniuniuPageDef.PAGE_TBNIUNIU_BEGIN] = TbNiuNiuBeginPage;
 			PageDef._pageClassMap[TbniuniuPageDef.PAGE_TBNIUNIU_WIN] = TbNiuNiuWinPage;
@@ -41,21 +37,22 @@ module gametbniuniu.page {
 				PathGameTongyong.atlas_game_ui_tongyong + "logo.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "touxiang.atlas",
-				Path_game_tbniuniu.atlas_game_ui + "tbniuniu.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "general/effect/suiji.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "general/effect/fapai_1.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "general/effect/xipai.atlas",
-				Path.custom_atlas_scene + 'card.atlas',
 
-				Path_game_tbniuniu.ui_tbniuniu + "sk/tbnn_0.png",
-				Path_game_tbniuniu.ui_tbniuniu + "sk/tbnn_0.sk",
-				Path_game_tbniuniu.ui_tbniuniu + "sk/tbnn_1.png",
-				Path_game_tbniuniu.ui_tbniuniu + "sk/tbnn_1.sk",
-				Path_game_tbniuniu.ui_tbniuniu + "sk/tbnn_2.png",
-				Path_game_tbniuniu.ui_tbniuniu + "sk/tbnn_2.sk",
-				Path_game_tbniuniu.ui_tbniuniu + "sk/tbnn_3.png",
-				Path_game_tbniuniu.ui_tbniuniu + "sk/tbnn_3.sk",
+				Path_game_tbniuniu.atlas_game_ui + "tbniuniu.atlas",
+				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_0.png",
+				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_0.sk",
+				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_1.png",
+				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_1.sk",
+				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_2.png",
+				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_2.sk",
+				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_3.png",
+				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_3.sk",
+
+				Path.custom_atlas_scene + 'card.atlas',
 				Path.map + 'pz_tbniuniu.png',
 				Path.map_far + 'bg_tbniuniu.jpg'
 			]

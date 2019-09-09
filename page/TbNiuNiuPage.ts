@@ -19,6 +19,10 @@ module gametbniuniu.page {
 				PathGameTongyong.atlas_game_ui_tongyong+ "hud.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong+ "dating.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong+ "logo.atlas",
+				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_0.png",
+				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_1.png",
+				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_2.png",
+				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_3.png",
 			];
 			this._isNeedDuang = false;
 		}
