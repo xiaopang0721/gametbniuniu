@@ -3,7 +3,7 @@
 */
 module gametbniuniu.page {
 	export class TbNiuNiuPageOld extends game.gui.base.Page {
-		private _viewUI: ui.game_ui.tbniuniu.TongBiNN_HUDUI;
+		private _viewUI: ui.nqp.game_ui.tbniuniu.TongBiNN_HUDUI;
 		private _difenTmep: any = [1, 10, 50, 100];
 		private _leastTmep: any = [50, 200, 500, 1000];
 		private _player: any;

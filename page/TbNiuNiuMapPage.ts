@@ -23,7 +23,7 @@ module gametbniuniu.page {
     };
 
     export class TbNiuNiuMapPage extends game.gui.base.Page {
-        private _viewUI: ui.game_ui.tbniuniu.TongBiNNUI;
+        private _viewUI: ui.nqp.game_ui.tbniuniu.TongBiNNUI;
         private _niuMgr: TbNiuNiuMgr;
         private _niuStory: TbniuniuStory;
         private _playerList: any;
