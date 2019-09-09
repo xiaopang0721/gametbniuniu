@@ -48,6 +48,14 @@ module gametbniuniu.page {
 				PathGameTongyong.atlas_game_ui_tongyong + "general/effect/xipai.atlas",
 				Path.custom_atlas_scene + 'card.atlas',
 
+				Path_game_tbniuniu.ui_tbniuniu + "sk/tbnn_0.png",
+				Path_game_tbniuniu.ui_tbniuniu + "sk/tbnn_0.sk",
+				Path_game_tbniuniu.ui_tbniuniu + "sk/tbnn_1.png",
+				Path_game_tbniuniu.ui_tbniuniu + "sk/tbnn_1.sk",
+				Path_game_tbniuniu.ui_tbniuniu + "sk/tbnn_2.png",
+				Path_game_tbniuniu.ui_tbniuniu + "sk/tbnn_2.sk",
+				Path_game_tbniuniu.ui_tbniuniu + "sk/tbnn_3.png",
+				Path_game_tbniuniu.ui_tbniuniu + "sk/tbnn_3.sk",
 				Path.map + 'pz_tbniuniu.png',
 				Path.map_far + 'bg_tbniuniu.jpg'
 			]
