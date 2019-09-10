@@ -49,6 +49,7 @@ module gametbniuniu.page {
                 PathGameTongyong.atlas_game_ui_tongyong + "pai.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "touxiang.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong + "dating.atlas",
                 Path_game_tbniuniu.atlas_game_ui + "tbniuniu.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general/effect/suiji.atlas",
