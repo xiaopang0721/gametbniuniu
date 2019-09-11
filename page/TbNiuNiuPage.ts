@@ -8,17 +8,18 @@ module gametbniuniu.page {
 		private _leastTmep: any = [50, 200, 500, 1000];
 		private _difenClipList: ClipUtil[] = [];
 		private _leastClipList: ClipUtil[] = [];
+		private _clipArr: any[] = [ClipUtil.HUD_FONT0, ClipUtil.HUD_FONT1, ClipUtil.HUD_FONT2, ClipUtil.HUD_FONT3];
 		private _player: any;
 		private _playerInfo: any;
 		constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
 			super(v, onOpenFunc, onCloseFunc);
 			this._asset = [
 				Path_game_tbniuniu.atlas_game_ui + "tbniuniu.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong+ "general.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "touxiang.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong+ "hud.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong+ "dating.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong+ "logo.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "dating.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "logo.atlas",
 				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_0.png",
 				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_1.png",
 				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_2.png",
@@ -37,14 +38,14 @@ module gametbniuniu.page {
 			}
 			for (let index = 0; index < 4; index++) {
 				if (!this._difenClipList[index]) {
-					this._difenClipList[index] = new ClipUtil(ClipUtil.HUD_FONT);
+					this._difenClipList[index] = new ClipUtil(this._clipArr[index]);
 					this._difenClipList[index].x = this._viewUI["txt_difen" + index].x;
 					this._difenClipList[index].y = this._viewUI["txt_difen" + index].y;
 					this._viewUI["txt_difen" + index].parent && this._viewUI["txt_difen" + index].parent.addChild(this._difenClipList[index]);
 					this._viewUI["txt_difen" + index].removeSelf();
 				}
 				if (!this._leastClipList[index]) {
-					this._leastClipList[index] = new ClipUtil(ClipUtil.HUD_FONT);
+					this._leastClipList[index] = new ClipUtil(this._clipArr[index]);
 					this._leastClipList[index].x = this._viewUI["txt_least" + index].x;
 					this._leastClipList[index].y = this._viewUI["txt_least" + index].y;
 					this._leastClipList[index].scale(0.8, 0.8);
