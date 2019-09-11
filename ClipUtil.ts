@@ -9,8 +9,14 @@ module gametbniuniu {
         public static ADD_MONEY_FONT: any;
         //扣钱飘字
         public static SUB_MONEY_FONT: any;
-        //HUD数字
-        public static HUD_FONT: any;
+        //底分数字初级
+        public static HUD_FONT0: any;
+        //底分数字小资
+        public static HUD_FONT1: any;
+        //底分数字老板
+        public static HUD_FONT2: any;
+        //底分数字富豪
+        public static HUD_FONT3: any;
 
         static init(): void {
             this.MONEY_FONT2 = {
@@ -42,10 +48,40 @@ module gametbniuniu {
                 space: -8
             };
 
-            //HUD数字
-            this.HUD_FONT = {
+            //底分数字初级
+            this.HUD_FONT0 = {
                 source: PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
-                url: PathGameTongyong.ui_tongyong_dating + 'clip_dizhu.png',
+                url: PathGameTongyong.ui_tongyong_dating + 'clip_dizhu0.png',
+                clipWidth: 22,
+                clipHeight: 27,
+                clipX: 10,
+                space: -5
+            };
+
+            //底分数字小资
+            this.HUD_FONT1 = {
+                source: PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
+                url: PathGameTongyong.ui_tongyong_dating + 'clip_dizhu1.png',
+                clipWidth: 22,
+                clipHeight: 27,
+                clipX: 10,
+                space: -5
+            };
+
+            //底分数字老板
+            this.HUD_FONT2 = {
+                source: PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
+                url: PathGameTongyong.ui_tongyong_dating + 'clip_dizhu2.png',
+                clipWidth: 22,
+                clipHeight: 27,
+                clipX: 10,
+                space: -5
+            };
+
+            //底分数字富豪
+            this.HUD_FONT3 = {
+                source: PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
+                url: PathGameTongyong.ui_tongyong_dating + 'clip_dizhu3.png',
                 clipWidth: 22,
                 clipHeight: 27,
                 clipX: 10,
