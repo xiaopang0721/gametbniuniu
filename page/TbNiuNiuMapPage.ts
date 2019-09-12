@@ -583,7 +583,7 @@ module gametbniuniu.page {
             playerIcon.clip_money.visible = false;
             this._clipList.push(valueClip);
             Laya.Tween.clearAll(valueClip);
-            Laya.Tween.to(valueClip, { y: valueClip.y - 30 }, 1500);
+            Laya.Tween.to(valueClip, { y: valueClip.y - 45 }, 1500);
         }
 
         //清理所有飘字clip
