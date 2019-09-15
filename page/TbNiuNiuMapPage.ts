@@ -124,6 +124,16 @@ module gametbniuniu.page {
             this.onUpdateUnitOffline();
         }
 
+        private _curDiffTime: number;
+        update(diff: number) {
+            if (!this._curDiffTime || this._curDiffTime < 0) {
+                this._viewUI.btn_chongzhi.ani1.play(0, false);
+                this._curDiffTime = TongyongPageDef.CZ_PLAY_DIFF_TIME;
+            } else {
+                this._curDiffTime -= diff;
+            }
+        }
+
         //帧间隔心跳
         deltaUpdate() {
             if (!this._viewUI) return;
