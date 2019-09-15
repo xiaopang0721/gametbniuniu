@@ -3,7 +3,7 @@
 */
 module gametbniuniu.page {
 	export class TbNiuNiuTuoGuanPage extends game.gui.base.Page {
-		private _viewUI: ui.game_ui.tbniuniu.TuoGuanUI;
+		private _viewUI: ui.nqp.game_ui.tbniuniu.TuoGuanUI;
 		private _checkBoxList: Array<CheckBox>;
 		private _niuMgr: TbNiuNiuMgr;
 		private _niuStory: TbniuniuStory;
@@ -15,6 +15,7 @@ module gametbniuniu.page {
 			this._isClickBlack = false;
 			this._asset = [
 				PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "dating.atlas",
 			];
 		}
 

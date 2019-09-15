@@ -23,7 +23,7 @@ module gametbniuniu.page {
     };
 
     export class TbNiuNiuMapPage extends game.gui.base.Page {
-        private _viewUI: ui.game_ui.tbniuniu.TongBiNNUI;
+        private _viewUI: ui.nqp.game_ui.tbniuniu.TongBiNNUI;
         private _niuMgr: TbNiuNiuMgr;
         private _niuStory: TbniuniuStory;
         private _playerList: any;
@@ -49,11 +49,16 @@ module gametbniuniu.page {
                 PathGameTongyong.atlas_game_ui_tongyong + "pai.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "touxiang.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong + "dating.atlas",
                 Path_game_tbniuniu.atlas_game_ui + "tbniuniu.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general/effect/suiji.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general/effect/fapai_1.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general/effect/xipai.atlas",
+                Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_0.png",
+                Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_1.png",
+                Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_2.png",
+                Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_3.png",
             ];
         }
 
@@ -79,6 +84,7 @@ module gametbniuniu.page {
             } else {
                 this.onUpdateMapInfo();
             }
+            this._viewUI.btn_spread.left = this._game.isFullScreen ? 25 : 10;
         }
 
         // 页面打开时执行函数
@@ -117,6 +123,16 @@ module gametbniuniu.page {
             this._game.network.addHanlder(Protocols.SMSG_OPERATION_FAILED, this, this.onOptHandler);
 
             this.onUpdateUnitOffline();
+        }
+
+        private _curDiffTime: number;
+        update(diff: number) {
+            if (!this._curDiffTime || this._curDiffTime < 0) {
+                this._viewUI.btn_chongzhi.ani1.play(0, false);
+                this._curDiffTime = TongyongPageDef.CZ_PLAY_DIFF_TIME;
+            } else {
+                this._curDiffTime -= diff;
+            }
         }
 
         //帧间隔心跳
@@ -179,8 +195,7 @@ module gametbniuniu.page {
 
         //控制发牌动画
         private onUpdateAniDeal(): void {
-            this._viewUI.ani_deal.ani1.stop();
-            this._viewUI.ani_deal.visible = false;
+            this._viewUI.paixie.ani2.gotoAndStop(0);
         }
 
         private onWashCardOver(): void {
@@ -578,7 +593,7 @@ module gametbniuniu.page {
             playerIcon.clip_money.visible = false;
             this._clipList.push(valueClip);
             Laya.Tween.clearAll(valueClip);
-            Laya.Tween.to(valueClip, { y: valueClip.y - 30 }, 1500);
+            Laya.Tween.to(valueClip, { y: valueClip.y - 45 }, 1500);
         }
 
         //清理所有飘字clip
@@ -635,7 +650,6 @@ module gametbniuniu.page {
             if (this._curStatus > MAP_STATUS.PLAY_STATUS_NONE && this._curStatus < MAP_STATUS.PLAY_STATUS_SHOW_GAME) {
                 this._pageHandle.pushClose({ id: TongyongPageDef.PAGE_TONGYONG_MATCH, parent: this._game.uiRoot.HUD });
             }
-            this._viewUI.ani_deal.visible = this._curStatus == MAP_STATUS.PLAY_STATUS_PUSH_CARD && this._niuStory.isFaPai == 1;
             switch (this._curStatus) {
                 case MAP_STATUS.PLAY_STATUS_NONE:// 准备阶段
                     this.initRoomConfig();
@@ -672,7 +686,7 @@ module gametbniuniu.page {
                     })
                     break;
                 case MAP_STATUS.PLAY_STATUS_PUSH_CARD:// 发牌阶段
-                    this._viewUI.ani_deal.ani1.play(0, true);
+                    this._viewUI.paixie.ani2.play(0, true);
                     this._viewUI.box_betRate.visible = false;
                     this._viewUI.box_status.visible = false;
                     this._viewUI.box_tips.visible = false;
@@ -713,7 +727,7 @@ module gametbniuniu.page {
                             TongyongPageDef.ins.alertRecharge(StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", this._room_config[1]), () => {
                                 this._game.uiRoot.general.open(DatingPageDef.PAGE_CHONGZHI);
                             }, () => {
-                            }, false, PathGameTongyong.ui_tongyong_general + "btn_cz.png");
+                            }, true, TongyongPageDef.TIPS_SKIN_STR["cz"]);
                         });
                         if (this._niuMgr.isTuoGuan > 0) {
                             this._niuMgr.isTuoGuan = 0;
@@ -795,7 +809,7 @@ module gametbniuniu.page {
                             TongyongPageDef.ins.alertRecharge(StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", this._room_config[1]), () => {
                                 this._game.uiRoot.general.open(DatingPageDef.PAGE_CHONGZHI);
                             }, () => {
-                            }, false, PathGameTongyong.ui_tongyong_general + "btn_cz.png");
+                            }, true, TongyongPageDef.TIPS_SKIN_STR["cz"]);
                             return;
                         }
                     }
@@ -853,7 +867,7 @@ module gametbniuniu.page {
                                 TongyongPageDef.ins.alertRecharge(StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", this._room_config[1]), () => {
                                     this._game.uiRoot.general.open(DatingPageDef.PAGE_CHONGZHI);
                                 }, () => {
-                                }, false, PathGameTongyong.ui_tongyong_general + "btn_cz.png");
+                                }, true, TongyongPageDef.TIPS_SKIN_STR["cz"]);
                                 return;
                             }
                         }
@@ -954,8 +968,7 @@ module gametbniuniu.page {
             this._viewUI.box_timer.visible = false;
             this._viewUI.box_id.visible = false;
             this._viewUI.btn_tanpai.visible = false;
-            this._viewUI.ani_deal.ani1.stop();
-            this._viewUI.ani_deal.visible = false;
+            this._viewUI.paixie.ani2.gotoAndStop(0);
             this._viewUI.xipai.visible = false;
             this._viewUI.paixie.cards.visible = false;
             this._viewUI.paixie.ani_chupai.stop();

@@ -60,7 +60,7 @@ module gametbniuniu.story {
 
 		private createObj() {
 			let card = this._game.sceneObjectMgr.createOfflineObject(SceneRoot.CARD_MARK, TbNiuNiuData) as TbNiuNiuData;
-			card.pos = new Vector2(825, 220);
+			card.pos = new Vector2(850, 200);
 			return card;
 		}
 

@@ -9,7 +9,7 @@ module gametbniuniu.page {
 		TYPE_CARD_BEISHU = 3,
 	}
 	export class TbNiuNiuRulePage extends game.gui.base.Page {
-		private _viewUI: ui.game_ui.tbniuniu.TongBiNN_GuiZeUI;
+		private _viewUI: ui.nqp.game_ui.tbniuniu.TongBiNN_GuiZeUI;
 		constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
 			super(v, onOpenFunc, onCloseFunc);
 			this._isNeedBlack = true;
