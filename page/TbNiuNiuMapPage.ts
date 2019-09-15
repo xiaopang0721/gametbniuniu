@@ -194,8 +194,7 @@ module gametbniuniu.page {
 
         //控制发牌动画
         private onUpdateAniDeal(): void {
-            this._viewUI.ani_deal.ani1.stop();
-            this._viewUI.ani_deal.visible = false;
+            this._viewUI.paixie.ani2.gotoAndStop(0);
         }
 
         private onWashCardOver(): void {
@@ -650,7 +649,6 @@ module gametbniuniu.page {
             if (this._curStatus > MAP_STATUS.PLAY_STATUS_NONE && this._curStatus < MAP_STATUS.PLAY_STATUS_SHOW_GAME) {
                 this._pageHandle.pushClose({ id: TongyongPageDef.PAGE_TONGYONG_MATCH, parent: this._game.uiRoot.HUD });
             }
-            this._viewUI.ani_deal.visible = this._curStatus == MAP_STATUS.PLAY_STATUS_PUSH_CARD && this._niuStory.isFaPai == 1;
             switch (this._curStatus) {
                 case MAP_STATUS.PLAY_STATUS_NONE:// 准备阶段
                     this.initRoomConfig();
@@ -687,7 +685,7 @@ module gametbniuniu.page {
                     })
                     break;
                 case MAP_STATUS.PLAY_STATUS_PUSH_CARD:// 发牌阶段
-                    this._viewUI.ani_deal.ani1.play(0, true);
+                    this._viewUI.paixie.ani2.play(0, true);
                     this._viewUI.box_betRate.visible = false;
                     this._viewUI.box_status.visible = false;
                     this._viewUI.box_tips.visible = false;
@@ -969,8 +967,7 @@ module gametbniuniu.page {
             this._viewUI.box_timer.visible = false;
             this._viewUI.box_id.visible = false;
             this._viewUI.btn_tanpai.visible = false;
-            this._viewUI.ani_deal.ani1.stop();
-            this._viewUI.ani_deal.visible = false;
+            this._viewUI.paixie.ani2.gotoAndStop(0);
             this._viewUI.xipai.visible = false;
             this._viewUI.paixie.cards.visible = false;
             this._viewUI.paixie.ani_chupai.stop();
