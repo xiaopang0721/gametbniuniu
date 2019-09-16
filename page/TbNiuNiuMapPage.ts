@@ -84,7 +84,8 @@ module gametbniuniu.page {
             } else {
                 this.onUpdateMapInfo();
             }
-            this._viewUI.btn_spread.left = this._game.isFullScreen ? 25 : 10;
+            this._viewUI.btn_spread.left = this._game.isFullScreen ? 30 : 10;
+            this._viewUI.box_menu.left = this._game.isFullScreen ? 25 : 10;
         }
 
         // 页面打开时执行函数
