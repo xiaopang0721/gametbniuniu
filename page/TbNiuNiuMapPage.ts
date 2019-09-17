@@ -84,7 +84,8 @@ module gametbniuniu.page {
             } else {
                 this.onUpdateMapInfo();
             }
-            this._viewUI.btn_spread.left = this._game.isFullScreen ? 25 : 10;
+            this._viewUI.btn_spread.left = this._game.isFullScreen ? 30 : 10;
+            this._viewUI.box_menu.left = this._game.isFullScreen ? 25 : 10;
         }
 
         // 页面打开时执行函数
@@ -127,6 +128,7 @@ module gametbniuniu.page {
 
         private _curDiffTime: number;
         update(diff: number) {
+            super.update(diff);
             if (!this._curDiffTime || this._curDiffTime < 0) {
                 this._viewUI.btn_chongzhi.ani1.play(0, false);
                 this._curDiffTime = TongyongPageDef.CZ_PLAY_DIFF_TIME;
