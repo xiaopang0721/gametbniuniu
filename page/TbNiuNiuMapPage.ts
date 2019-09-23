@@ -175,7 +175,7 @@ module gametbniuniu.page {
             this._viewUI.btn_tuoguan.skin = this._niuMgr.isTuoGuan > 0 ? Path_game_tbniuniu.ui_tbniuniu + "btn_tg1.png" : Path_game_tbniuniu.ui_tbniuniu + "btn_tg0.png";
             if (this._niuMgr.isTuoGuan == 0) return;
             if (this._niuMapInfo && this._curStatus == MAP_STATUS.PLAY_STATUS_SHOW_GAME) {
-                if (this._game.sceneObjectMgr.mainPlayer.GetMoney()/100 < this._room_config[1]) return;
+                if (this._game.sceneObjectMgr.mainPlayer.GetMoney() / 100 < this._room_config[1]) return;
                 this.continueGame();
                 this._game.sceneObjectMgr.leaveStory();
             } else if (!this._niuMapInfo) {
@@ -299,7 +299,6 @@ module gametbniuniu.page {
                         }
                     }
                     this._playerList[index].view_icon.txt_name.text = getMainPlayerName(unit.GetName());
-                    this._playerList[index].view_icon.img_icon.skin = iconUrl;
                     if (this._curStatus != MAP_STATUS.PLAY_STATUS_SETTLE || this._niuStory.isReConnected) {
                         this.updateMoney();
                     }
@@ -331,6 +330,7 @@ module gametbniuniu.page {
                         }
                     } else {
                         this._playerList[index].view_icon.img_qifu.visible = false;
+                        this._playerList[index].view_icon.img_icon.skin = iconUrl;
                     }
                 }
             }
@@ -717,7 +717,7 @@ module gametbniuniu.page {
                             this._game.uiRoot.HUD.open(TbniuniuPageDef.PAGE_TBNIUNIU_LOSE);
                         }
                     });
-                    if (this._room_config && this._game.sceneObjectMgr.mainPlayer.GetMoney()/100 < this._room_config[1]) {
+                    if (this._room_config && this._game.sceneObjectMgr.mainPlayer.GetMoney() / 100 < this._room_config[1]) {
                         Laya.timer.once(5500, this, () => {
                             TongyongPageDef.ins.alertRecharge(StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", this._room_config[1]), () => {
                                 this._game.uiRoot.general.open(DatingPageDef.PAGE_CHONGZHI);
@@ -800,7 +800,7 @@ module gametbniuniu.page {
                 case this._viewUI.btn_continue://继续游戏
                     if (this._room_config) {
                         let mainPlayer = this._game.sceneObjectMgr.mainPlayer;
-                        if (mainPlayer && mainPlayer.GetMoney()/100 < this._room_config[1]) {
+                        if (mainPlayer && mainPlayer.GetMoney() / 100 < this._room_config[1]) {
                             TongyongPageDef.ins.alertRecharge(StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", this._room_config[1]), () => {
                                 this._game.uiRoot.general.open(DatingPageDef.PAGE_CHONGZHI);
                             }, () => {
@@ -858,7 +858,7 @@ module gametbniuniu.page {
                     } else {
                         if (this._niuMapInfo && this._room_config) {
                             let mainPlayer = this._game.sceneObjectMgr.mainPlayer;
-                            if (mainPlayer && mainPlayer.GetMoney()/100 < this._room_config[1]) {
+                            if (mainPlayer && mainPlayer.GetMoney() / 100 < this._room_config[1]) {
                                 TongyongPageDef.ins.alertRecharge(StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", this._room_config[1]), () => {
                                     this._game.uiRoot.general.open(DatingPageDef.PAGE_CHONGZHI);
                                 }, () => {
