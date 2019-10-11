@@ -19,14 +19,14 @@ module gametbniuniu.manager {
 		BOMB = 13, //炸弹
 		SMALL_NIU = 14 //五小牛
 	}
+
 	const enum MULTIPLE {
 		RATE_1 = 1, //没牛——牛六	1倍
 		RATE_2 = 2, //牛七——牛八	2倍
 		RATE_3 = 3, //牛九		  3倍
-		RATE_4 = 4, //牛牛，四花牛   4倍
-		RATE_5 = 5, //五花牛，炸弹   5倍
-		RATE_6 = 6, //五小牛		  6倍
+		RATE_4 = 4, //牛牛以上		4倍
 	}
+
 	const MAX_SEATS_COUNT = 6; //最大座位数
 	const MAX_CARDS_COUNT = 5; //最大手牌数
 
@@ -95,15 +95,7 @@ module gametbniuniu.manager {
 
 		public checkCardsRate(cardtype): number {
 			let cardRate = MULTIPLE.RATE_1;
-			if (cardtype == 14) {
-				cardRate = MULTIPLE.RATE_6;
-				return cardRate;
-			}
-			if (cardtype == 12 || cardtype == 13) {
-				cardRate = MULTIPLE.RATE_5;
-				return cardRate;
-			}
-			if (cardtype == 10 || cardtype == 11) {
+			if (cardtype >= 10) {
 				cardRate = MULTIPLE.RATE_4;
 				return cardRate;
 			}
