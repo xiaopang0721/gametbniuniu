@@ -34,8 +34,10 @@ module gametbniuniu.page {
 			this._viewUI.panel_wanfa.vScrollBarSkin = "";
 			this._viewUI.panel_wanfa.vScrollBar.autoHide = true;
 			this._viewUI.panel_wanfa.vScrollBar.elasticDistance = 100;
-			//更新滚动条最大滚动数值
-			this._viewUI.panel_wanfa.vScrollBar.max = 820;
+			this._viewUI.panel_leixing.vScrollBarSkin = "";
+			this._viewUI.panel_leixing.vScrollBar.autoHide = true;
+			this._viewUI.panel_leixing.vScrollBar.elasticDistance = 100;
+
 			this._viewUI.btn_tab.selectHandler = Handler.create(this, this.selectHandler, null, false);
 			if (this.dataSource) {
 				this._viewUI.btn_tab.selectedIndex = this.dataSource;
@@ -46,7 +48,7 @@ module gametbniuniu.page {
 
 		private selectHandler(index: number): void {
 			this._viewUI.panel_wanfa.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_WANFA_JIESHAO;
-			this._viewUI.txt_leixing.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_CARD_LEIXING;
+			this._viewUI.panel_leixing.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_CARD_LEIXING;
 			this._viewUI.txt_daxiao.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_CARD_DAXIAO;
 			this._viewUI.txt_beishu.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_CARD_BEISHU;
 		}
