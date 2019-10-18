@@ -311,10 +311,11 @@ module gametbniuniu.page {
                                 viewPlayer.view_icon.img_qifu.visible = true;
                                 viewPlayer.view_icon.img_icon.skin = iconUrl;
                             })
-                        } else {
-                            viewPlayer.view_icon.img_qifu.visible = true;
-                            viewPlayer.view_icon.img_icon.skin = iconUrl;
-                        }
+                        } 
+                        // else {
+                        //     viewPlayer.view_icon.img_qifu.visible = true;
+                        //     viewPlayer.view_icon.img_icon.skin = iconUrl;
+                        // }
                     } else {
                         viewPlayer.view_icon.img_qifu.visible = false;
                         viewPlayer.view_icon.img_icon.skin = iconUrl;
