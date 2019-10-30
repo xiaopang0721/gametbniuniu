@@ -131,7 +131,7 @@ module gametbniuniu.data {
 
 		moveCard() {
 			this.isFinalPos = false;
-			super.fapai();
+			super.movePai();
 		}
 	}
 }
