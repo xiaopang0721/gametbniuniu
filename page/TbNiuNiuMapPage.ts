@@ -233,7 +233,7 @@ module gametbniuniu.page {
                 this.onUpdateUnitOffline();
                 this._game.uiRoot.general.open(TongyongPageDef.PAGE_TONGYONG_MATCH, null, (page) => {
                     this.showContinue(page.dataSource);
-                    if (!this._game.sceneObjectMgr.mapInfo) {
+                    if (this._game.sceneObjectMgr && !this._game.sceneObjectMgr.mapInfo) {
                         this._niuMgr.isTuoGuan = 0;
                     }
                 });
