@@ -59,20 +59,25 @@ module gametbniuniu.page {
 		protected onOpen(): void {
 			super.onOpen();
 			this.initRoomInfo();
-			this._viewUI.btn_xinshou.on(LEvent.CLICK, this, this.onBtnClickWithTween);
-			this._viewUI.btn_chuji.on(LEvent.CLICK, this, this.onBtnClickWithTween);
-			this._viewUI.btn_zhongji.on(LEvent.CLICK, this, this.onBtnClickWithTween);
-			this._viewUI.btn_gaoji.on(LEvent.CLICK, this, this.onBtnClickWithTween);
 			this._viewUI.btn_join.on(LEvent.CLICK, this, this.onBtnClickWithTween);
 			(this._viewUI.view as TongyongHudNqpPage).onOpen(this._game, TbniuniuPageDef.GAME_NAME);
 			for (let index = 0; index < this._viewUI.box_right.numChildren; index++) {
 				this._viewUI.box_right._childs[index].visible = true;
 				Laya.Tween.from(this._viewUI.box_right._childs[index], {
 					right: -300
-				}, 200 + index * 100, Laya.Ease.linearNone);
+				}, this._initialtime + index * this._time, Laya.Ease.linearNone);
 			}
-
+			Laya.timer.once(this._initialtime + 4 * this._time, this, this.onComplete)
 			this._game.playMusic(Path_game_tbniuniu.music_tbniuniu + "tbnn_bgm.mp3");
+		}
+
+		private _initialtime: number = 200;
+		private _time: number = 100;
+		private onComplete(){
+			this._viewUI.btn_xinshou.on(LEvent.CLICK, this, this.onBtnClickWithTween);
+			this._viewUI.btn_chuji.on(LEvent.CLICK, this, this.onBtnClickWithTween);
+			this._viewUI.btn_zhongji.on(LEvent.CLICK, this, this.onBtnClickWithTween);
+			this._viewUI.btn_gaoji.on(LEvent.CLICK, this, this.onBtnClickWithTween);
 		}
 
 		private initRoomInfo(): void {
