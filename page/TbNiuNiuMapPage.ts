@@ -91,6 +91,9 @@ module gametbniuniu.page {
         // 页面打开时执行函数
         protected onOpen(): void {
             super.onOpen();
+             //api充值不显示
+            this._viewUI.btn_chongzhi.visible = !WebConfig.enterGameLocked;
+            
             this._viewUI.btn_spread.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.btn_cardType.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.btn_back.on(LEvent.CLICK, this, this.onBtnClickWithTween);
@@ -230,7 +233,7 @@ module gametbniuniu.page {
                 this.onUpdateUnitOffline();
                 this._game.uiRoot.general.open(TongyongPageDef.PAGE_TONGYONG_MATCH, null, (page) => {
                     this.showContinue(page.dataSource);
-                    if (!this._game.sceneObjectMgr.mapInfo) {
+                    if (this._game.sceneObjectMgr && !this._game.sceneObjectMgr.mapInfo) {
                         this._niuMgr.isTuoGuan = 0;
                     }
                 });
