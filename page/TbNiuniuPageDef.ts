@@ -44,13 +44,9 @@ module gametbniuniu.page {
 
 				Path_game_tbniuniu.atlas_game_ui + "tbniuniu.atlas",
 				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_0.png",
-				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_0.sk",
 				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_1.png",
-				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_1.sk",
 				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_2.png",
-				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_2.sk",
 				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_3.png",
-				Path_game_tbniuniu.ui_tbniuniu_sk + "tbnn_3.sk",
 
 				Path.custom_atlas_scene + 'card.atlas',
 				Path.map + 'pz_tbniuniu.png',
