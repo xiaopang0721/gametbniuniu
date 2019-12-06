@@ -60,7 +60,7 @@ module gametbniuniu.page {
 			super.onOpen();
 			this.initRoomInfo();
 			this._viewUI.btn_join.on(LEvent.CLICK, this, this.onBtnClickWithTween);
-			(this._viewUI.view as TongyongHudNqpPage).onOpen(this._game, TbniuniuPageDef.GAME_NAME, false);
+			(this._viewUI.view as TongyongHudPage).onOpen(this._game, TbniuniuPageDef.GAME_NAME, false);
 			for (let index = 0; index < this._viewUI.box_right.numChildren; index++) {
 				this._viewUI.box_right._childs[index].visible = true;
 				Laya.Tween.from(this._viewUI.box_right._childs[index], {
