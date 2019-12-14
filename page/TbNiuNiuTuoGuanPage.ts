@@ -3,7 +3,7 @@
 */
 module gametbniuniu.page {
 	export class TbNiuNiuTuoGuanPage extends game.gui.base.Page {
-		private _viewUI: ui.nqp.game_ui.tbniuniu.TuoGuanUI;
+		private _viewUI: ui.ajqp.game_ui.tbniuniu.TuoGuanUI;
 		private _checkBoxList: Array<CheckBox>;
 		private _niuMgr: TbNiuNiuMgr;
 		private _niuStory: TbniuniuStory;
@@ -41,7 +41,6 @@ module gametbniuniu.page {
 		// 页面打开时执行函数
 		protected onOpen(): void {
 			super.onOpen();
-			this._viewUI.btn_cancel.on(LEvent.CLICK, this, this.onBtnClickWithTween);
 			this._viewUI.btn_enter.on(LEvent.CLICK, this, this.onBtnClickWithTween);
 			this._viewUI.box_rate0.on(LEvent.CLICK, this, this.onBtnClickWithTween);
 			this._viewUI.box_rate1.on(LEvent.CLICK, this, this.onBtnClickWithTween);
@@ -52,9 +51,6 @@ module gametbniuniu.page {
 
 		protected onBtnTweenEnd(e: any, target: any): void {
 			switch (target) {
-				case this._viewUI.btn_cancel:
-					this.close();
-					break;
 				case this._viewUI.btn_enter:
 					this._niuMgr.isTuoGuan = this._tuoGuanRate;
 					this.close();
@@ -86,7 +82,6 @@ module gametbniuniu.page {
 
 		public close(): void {
 			if (this._viewUI) {
-				this._viewUI.btn_cancel.off(LEvent.CLICK, this, this.onBtnClickWithTween);
 				this._viewUI.btn_enter.off(LEvent.CLICK, this, this.onBtnClickWithTween);
 				this._viewUI.box_rate0.off(LEvent.CLICK, this, this.onBtnClickWithTween);
 				this._viewUI.box_rate1.off(LEvent.CLICK, this, this.onBtnClickWithTween);

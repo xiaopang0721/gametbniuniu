@@ -63,6 +63,10 @@ module gametbniuniu.manager {
 			this.event(TbNiuNiuMgr.TUOGUAN_GAME);
 		}
 
+		get isGaiPai() {
+			return this._isGaiPai;
+		}
+
 		//对牌进行排序
 		SortCards(cards: any[]) {
 			if (!cards) return;
@@ -336,7 +340,7 @@ module gametbniuniu.manager {
 			let counter = 0;
 			for (let j: number = 0; j < MAX_CARDS_COUNT; j++) {
 				for (let i: number = 0; i < this._cards.length / MAX_CARDS_COUNT; i++) {
-					Laya.timer.once(150 * count, this, () => {
+					Laya.timer.once(120 * count, this, () => {
 						this._game.playSound(PathGameTongyong.music_tongyong + "fapai.mp3", false);
 						let card = this._cards[i * MAX_CARDS_COUNT + j];
 						if (!card) return;

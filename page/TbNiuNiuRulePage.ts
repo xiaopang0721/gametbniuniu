@@ -9,7 +9,7 @@ module gametbniuniu.page {
 		TYPE_CARD_BEISHU = 3,
 	}
 	export class TbNiuNiuRulePage extends game.gui.base.Page {
-		private _viewUI: ui.nqp.game_ui.tbniuniu.TongBiNN_GuiZeUI;
+		private _viewUI: ui.ajqp.game_ui.tbniuniu.TongBiNN_GuiZeUI;
 		constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
 			super(v, onOpenFunc, onCloseFunc);
 			this._isNeedBlack = true;
@@ -45,9 +45,9 @@ module gametbniuniu.page {
 
 		private selectHandler(index: number): void {
 			this._viewUI.panel_wanfa.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_WANFA_JIESHAO;
-			this._viewUI.txt_leixing.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_CARD_LEIXING;
-			this._viewUI.txt_daxiao.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_CARD_DAXIAO;
-			this._viewUI.txt_beishu.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_CARD_BEISHU;
+			this._viewUI.img_leixing.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_CARD_LEIXING;
+			this._viewUI.img_daxiao.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_CARD_DAXIAO;
+			this._viewUI.img_beishu.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_CARD_BEISHU;
 		}
 
 		public close(): void {
