@@ -7,7 +7,7 @@ module gametbniuniu.data {
 		private _isFan: boolean = false;
 		private _ownerIdx: number;
 		private _b: boolean;
-		private _posList: any = [[400, 640, 110], [955, 420, 28], [955, 215, 28], [615, 130, 28], [230, 215, 28], [230, 420, 28]];
+		private _posList: any = [[400, 640, 110], [955, 425, 28], [955, 220, 28], [615, 135, 28], [230, 220, 28], [230, 425, 28]];
 		private _mainIdx: number;
 		private _maxSeats: number = 6;
 
@@ -92,7 +92,7 @@ module gametbniuniu.data {
 			let idx = this._ownerIdx;
 			let posIdx = (idx - this._mainIdx + this._maxSeats) % this._maxSeats;
 			let posX = posIdx == 0 ? 590 : this._posList[posIdx][0];
-			let posY = posIdx == 0 ? 485 : this._posList[posIdx][1];
+			let posY = posIdx == 0 ? 505 : this._posList[posIdx][1];
 			let space = posIdx == 0 ? 28 : this._posList[posIdx][2];
 			if (!this.targe_pos) {
 				this.targe_pos = new Vector2();
@@ -114,7 +114,7 @@ module gametbniuniu.data {
 			}
 			this.isFinalPos = false;
 			this.targe_pos.x = 590 + this.index * 28;
-			this.targe_pos.y = 485;
+			this.targe_pos.y = 505;
 			this.size = 0.65;
 			if (!this.pos) return;
 			Laya.Tween.to(this.pos, { x: this.targe_pos.x, y: this.targe_pos.y }, this.time_interval);

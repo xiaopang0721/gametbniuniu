@@ -490,8 +490,8 @@ module gametbniuniu.page {
             }
             if (info.SettleVal > 0) {
                 this._winnerIndex = this.getUnitUIPos(info.SeatIndex);
-                this._playerList[this._winnerIndex].view_icon.winner.visible = true;
-                this._playerList[this._winnerIndex].view_icon.winner.ani1.play(0, false);
+                // this._playerList[this._winnerIndex].view_icon.winner.visible = true;
+                // this._playerList[this._winnerIndex].view_icon.winner.ani1.play(0, false);
             }
             this._settleInfo.push(parseFloat(info.SeatIndex));
             this._settleInfo.push(parseFloat(info.SettleVal));
@@ -668,6 +668,12 @@ module gametbniuniu.page {
             if (this._curStatus > MAP_STATUS.PLAY_STATUS_NONE && this._curStatus < MAP_STATUS.PLAY_STATUS_SHOW_GAME) {
                 this._pageHandle.pushClose({ id: TongyongPageDef.PAGE_TONGYONG_MATCH, parent: this._game.uiRoot.HUD });
             }
+            if (this._curStatus != MAP_STATUS.PLAY_STATUS_SHOW_CARDS) {
+                this._viewUI.btn_tanpai.visible = false;
+            }
+            if (this._curStatus != MAP_STATUS.PLAY_STATUS_BET) {
+                this._viewUI.box_betRate.visible = false;
+            }
             switch (this._curStatus) {
                 case MAP_STATUS.PLAY_STATUS_NONE:// 准备阶段
                     this.initRoomConfig();
@@ -697,6 +703,7 @@ module gametbniuniu.page {
                             if (this._maxBetRate < this._niuMgr.isTuoGuan) {//玩家金币不足以继续下高倍注，默认当前可下的最大注
                                 this._niuMgr.isTuoGuan = this._maxBetRate;
                             }
+                            this._isDoBet = true;
                             this._game.network.call_tbniuniu_bet(this._niuMgr.isTuoGuan);
                             this._viewUI.box_betRate.visible = false;
                         }
@@ -704,7 +711,6 @@ module gametbniuniu.page {
                     break;
                 case MAP_STATUS.PLAY_STATUS_PUSH_CARD:// 发牌阶段
                     this._viewUI.paixie.ani2.play(0, true);
-                    this._viewUI.box_betRate.visible = false;
                     this._viewUI.box_status.visible = false;
                     this._viewUI.box_tips.visible = false;
                     break;
@@ -718,16 +724,13 @@ module gametbniuniu.page {
                     })
                     break;
                 case MAP_STATUS.PLAY_STATUS_COMPARE:// 比牌阶段
-                    this._viewUI.btn_tanpai.visible = false;
                     this._viewUI.box_tips.visible = false;
                     break;
                 case MAP_STATUS.PLAY_STATUS_SETTLE:// 结算阶段
                     this._viewUI.box_tips.visible = false;
-                    Laya.timer.once(1500, this, () => {
-                        this.addSettleEff();
-                        this.updateMoney();
-                    })
-                    Laya.timer.once(3500, this, () => {
+                    this.addSettleEff();
+                    this.updateMoney();
+                    Laya.timer.once(2000, this, () => {
                         if (this._mainPlayerBenefit > 0) {
                             let rand = MathU.randomRange(1, 3);
                             this._game.playSound(StringU.substitute(PathGameTongyong.music_tongyong + "win{0}.mp3", rand), true);
@@ -738,7 +741,7 @@ module gametbniuniu.page {
                         }
                     });
                     if (this._room_config && this._game.sceneObjectMgr.mainPlayer.GetMoney() / 100 < this._room_config[1]) {
-                        Laya.timer.once(5500, this, () => {
+                        Laya.timer.once(4000, this, () => {
                             TongyongPageDef.ins.alertRecharge(StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", this._room_config[1]), () => {
                                 this._game.uiRoot.general.open(DatingPageDef.PAGE_CHONGZHI);
                             }, () => {
@@ -751,7 +754,7 @@ module gametbniuniu.page {
                     }
                     break;
                 case MAP_STATUS.PLAY_STATUS_SHOW_GAME:// 本局展示阶段
-                    this._pageHandle.pushClose({ id: TbniuniuPageDef.PAGE_TBNIUNIU_WIN, parent: this._game.uiRoot.HUD });
+                    this._isDoBet = false;
                     if (this._niuMgr.isTuoGuan > 0) {//托管
                         if (this._viewUI.box_menu.y >= 0) {//每局重新开始把菜单收起来
                             this._viewUI.box_menu.y = -this._viewUI.box_menu.height;

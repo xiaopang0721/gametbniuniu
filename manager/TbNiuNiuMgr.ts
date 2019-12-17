@@ -243,7 +243,7 @@ module gametbniuniu.manager {
 									card.targe_pos = new Vector2();
 								}
 								card.isFinalPos = false;
-								card.targe_pos.y = card.targe_pos.y + 20;
+								card.targe_pos.y = card.targe_pos.y - 20;
 							}
 						}
 					}

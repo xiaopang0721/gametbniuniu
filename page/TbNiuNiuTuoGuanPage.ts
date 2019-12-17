@@ -4,7 +4,7 @@
 module gametbniuniu.page {
 	export class TbNiuNiuTuoGuanPage extends game.gui.base.Page {
 		private _viewUI: ui.ajqp.game_ui.tbniuniu.TuoGuanUI;
-		private _checkBoxList: Array<CheckBox>;
+		private _checkBoxList: any[];
 		private _niuMgr: TbNiuNiuMgr;
 		private _niuStory: TbniuniuStory;
 		private _tuoGuanRate: number;
@@ -75,7 +75,7 @@ module gametbniuniu.page {
 
 		private selectRate(rate: number): void {
 			for (let i: number = 0; i < this._checkBoxList.length; i++) {
-				this._checkBoxList[i].selected = rate == i;
+				this._checkBoxList[i].index = rate == i ? 2 : 1;
 			}
 			this._tuoGuanRate = rate + 1;
 		}
