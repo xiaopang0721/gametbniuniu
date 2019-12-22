@@ -87,7 +87,6 @@ module gametbniuniu.page {
             } else {
                 this.onUpdateMapInfo();
             }
-            this._viewUI.box_left.left = this._game.isFullScreen ? 30 : 10;
         }
 
         // 页面打开时执行函数
@@ -128,6 +127,24 @@ module gametbniuniu.page {
             this._game.qifuMgr.on(QiFuMgr.QIFU_FLY, this, this.qifuFly);
 
             this.onUpdateUnitOffline();
+        }
+
+        protected layout(): void {
+            super.layout();
+            if (this._viewUI) {
+                //全面屏
+                if (this._game.isFullScreen) {
+                    this._viewUI.box_top_left.left = 14 + 56;
+                    this._viewUI.box_room_left.left = 105 + 56;
+                    this._viewUI.box_top_right.right = 28 + 56;
+                    this._viewUI.box_bottom_right.right = 12 + 56;
+                } else {
+                    this._viewUI.box_top_left.left = 14;
+                    this._viewUI.box_room_left.left = 105;
+                    this._viewUI.box_top_right.right = 28;
+                    this._viewUI.box_bottom_right.right = 12;
+                }
+            }
         }
 
         private _curDiffTime: number;
@@ -197,7 +214,13 @@ module gametbniuniu.page {
             this._viewUI.btn_tuoguan.skin = this._niuMgr.isTuoGuan > 0 ? Path_game_tbniuniu.ui_tbniuniu + "btn_tg1.png" : Path_game_tbniuniu.ui_tbniuniu + "btn_tg0.png";
             if (this._niuMgr.isTuoGuan == 0) return;
             if (this._niuMapInfo && this._curStatus == MAP_STATUS.PLAY_STATUS_SHOW_GAME) {
-                if (this._game.sceneObjectMgr.mainPlayer.GetMoney() / 100 < this._room_config[1]) return;
+                if (this._game.sceneObjectMgr.mainPlayer.GetMoney() / 100 < this._room_config[1]) {
+                    TongyongPageDef.ins.alertRecharge(StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", this._room_config[1]), () => {
+                        this._game.uiRoot.general.open(DatingPageDef.PAGE_CHONGZHI);
+                    }, () => {
+                    }, true, TongyongPageDef.TIPS_SKIN_STR["cz"]);
+                    return;
+                }
                 this.continueGame();
                 this._game.sceneObjectMgr.leaveStory();
             } else if (!this._niuMapInfo) {
@@ -523,12 +546,12 @@ module gametbniuniu.page {
             let type: number = 0;//默认没牛
             if (cardType == 0) {//没牛
                 isplay && view.ani0.play(0, false);
-            } else if (cardType > 0 && cardType < 8) {//牛一到牛七
+            } else if (cardType > 0 && cardType < 7) {//牛一到牛六
                 type = 1;
                 view.type1.skin = StringU.substitute(Path_game_tbniuniu.ui_tbniuniu_niupai + "n_{0}.png", cardType);
                 view.rate1.skin = StringU.substitute(Path_game_tbniuniu.ui_tbniuniu_niupai + "sz_{0}.png", this._niuMgr.checkCardsRate(cardType));
                 isplay && view.ani1.play(0, false);
-            } else if (cardType >= 8 && cardType < 10) {//牛八，牛九
+            } else if (cardType >= 7 && cardType < 10) {//牛七，牛八，牛九
                 type = 2;
                 view.type2_1.skin = StringU.substitute(Path_game_tbniuniu.ui_tbniuniu_niupai + "n_{0}.png", cardType);
                 view.type2_2.skin = StringU.substitute(Path_game_tbniuniu.ui_tbniuniu_niupai + "n_{0}.png", cardType);
@@ -740,26 +763,22 @@ module gametbniuniu.page {
                             this._game.playSound(StringU.substitute(PathGameTongyong.music_tongyong + "lose{0}.mp3", rand), true);
                         }
                     });
+                    break;
+                case MAP_STATUS.PLAY_STATUS_SHOW_GAME:// 本局展示阶段
                     if (this._room_config && this._game.sceneObjectMgr.mainPlayer.GetMoney() / 100 < this._room_config[1]) {
-                        Laya.timer.once(4000, this, () => {
-                            TongyongPageDef.ins.alertRecharge(StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", this._room_config[1]), () => {
-                                this._game.uiRoot.general.open(DatingPageDef.PAGE_CHONGZHI);
-                            }, () => {
-                            }, true, TongyongPageDef.TIPS_SKIN_STR["cz"]);
-                        });
+                        TongyongPageDef.ins.alertRecharge(StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", this._room_config[1]), () => {
+                            this._game.uiRoot.general.open(DatingPageDef.PAGE_CHONGZHI);
+                        }, () => {
+                        }, true, TongyongPageDef.TIPS_SKIN_STR["cz"]);
                         if (this._niuMgr.isTuoGuan > 0) {
                             this._niuMgr.isTuoGuan = 0;
                             this._viewUI.btn_tuoguan.skin = Path_game_tbniuniu.ui_tbniuniu + "btn_tg0.png";
                         }
                     }
-                    break;
-                case MAP_STATUS.PLAY_STATUS_SHOW_GAME:// 本局展示阶段
                     this._isDoBet = false;
                     if (this._niuMgr.isTuoGuan > 0) {//托管
-                        if (this._viewUI.box_menu.y >= 0) {//每局重新开始把菜单收起来
-                            this._viewUI.box_menu.y = -this._viewUI.box_menu.height;
-                            this._viewUI.box_menu.visible = false;
-                            this._viewUI.btn_spread.visible = true;
+                        if (this._viewUI.box_menu.visible) {//每局重新开始把菜单收起来
+                            this.menuTween(false);
                         }
                         if (this._niuMapInfo instanceof MapInfo) {
                             this.continueGame();
@@ -941,7 +960,7 @@ module gametbniuniu.page {
         private onUpdateGameNo(): void {
             let gameNo = this._niuMapInfo.GetGameNo();
             if (gameNo) {
-                this._viewUI.box_id.visible = true;
+                this._viewUI.box_room_left.visible = true;
                 this._viewUI.txt_id.text = "牌局号：" + gameNo;
             }
         }
@@ -979,7 +998,7 @@ module gametbniuniu.page {
             this._viewUI.box_status.visible = false;
             this._viewUI.box_betRate.visible = false;
             this._viewUI.box_timer.visible = false;
-            this._viewUI.box_id.visible = false;
+            this._viewUI.box_room_left.visible = false;
             this._viewUI.btn_tanpai.visible = false;
             this._viewUI.paixie.ani2.gotoAndStop(0);
             this._viewUI.xipai.visible = false;
@@ -992,15 +1011,15 @@ module gametbniuniu.page {
                 this._room_config = ROOM_CONFIG[this._niuStory.maplv];
                 let str = "";
                 if (this._niuStory.maplv == Web_operation_fields.GAME_ROOM_CONFIG_TBNIUNIU_1) {
-                    str = "房间：新手场  底注：";
+                    this._viewUI.txt_roomtype.text = "房间：新手场";
                 } else if (this._niuStory.maplv == Web_operation_fields.GAME_ROOM_CONFIG_TBNIUNIU_2) {
-                    str = "房间：小资场  底注：";
+                    this._viewUI.txt_roomtype.text = "房间：小资场";
                 } else if (this._niuStory.maplv == Web_operation_fields.GAME_ROOM_CONFIG_TBNIUNIU_3) {
-                    str = "房间：老板场  底注：";
+                    this._viewUI.txt_roomtype.text = "房间：老板场";
                 } else if (this._niuStory.maplv == Web_operation_fields.GAME_ROOM_CONFIG_TBNIUNIU_4) {
-                    str = "房间：富豪场  底注：";
+                    this._viewUI.txt_roomtype.text = "房间：富豪场";
                 }
-                // this._viewUI.txt_base.text = str + this._room_config[0];
+                this._viewUI.txt_difen.text = "底注：" + this._room_config[0];
                 this.onUpdateBetBtn();
             }
         }
@@ -1027,7 +1046,7 @@ module gametbniuniu.page {
             this._viewUI.box_status.visible = false;
             this._viewUI.box_betRate.visible = false;
             this._viewUI.box_timer.visible = false;
-            this._viewUI.box_id.visible = false;
+            this._viewUI.box_room_left.visible = false;
             this._viewUI.btn_tanpai.visible = false;
             this._viewUI.paixie.cards.visible = false;
             this._viewUI.paixie.ani_chupai.stop();

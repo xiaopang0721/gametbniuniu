@@ -8,6 +8,7 @@ module gametbniuniu.page {
 		private _leastTmep: any = [50, 200, 500, 1000];
 		private _player: any;
 		private _playerInfo: any;
+
 		constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
 			super(v, onOpenFunc, onCloseFunc);
 			this._asset = [
@@ -58,11 +59,11 @@ module gametbniuniu.page {
 		}
 
 		private initRoomInfo(): void {
-			for (let i: number = 0; i < this._difenTmep.length; i++) {
-				this._viewUI["txt_difen" + i].text = "" + this._difenTmep[i];
+			for (let index = 0; index < this._difenTmep.length; index++) {
+				this._viewUI["txt_difen" + index].text = this._difenTmep[index] + "";
 			}
-			for (let i: number = 0; i < this._leastTmep.length; i++) {
-				this._viewUI["txt_least" + i].text = "" + this._leastTmep[i];
+			for (let index = 0; index < this._leastTmep.length; index++) {
+				this._viewUI["txt_least" + index].text = this._leastTmep[index] + "";
 			}
 		}
 
@@ -119,8 +120,8 @@ module gametbniuniu.page {
 				this._viewUI.btn_chuji.off(LEvent.CLICK, this, this.onBtnClickWithTween);
 				this._viewUI.btn_zhongji.off(LEvent.CLICK, this, this.onBtnClickWithTween);
 				this._viewUI.btn_gaoji.off(LEvent.CLICK, this, this.onBtnClickWithTween);
+				this._game.stopMusic();
 			}
-			this._game.stopMusic();
 			super.close();
 		}
 	}
