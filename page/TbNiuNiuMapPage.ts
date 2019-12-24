@@ -349,17 +349,20 @@ module gametbniuniu.page {
                         viewPlayer.view_icon.qifu_type.skin = this._qifuTypeImgUrl;
                         this.playTween(viewPlayer.view_icon.qifu_type, qifu_index);
                     }
-                    //时间戳变化 才加上祈福标志
-                    if (TongyongUtil.getIsHaveQiFu(unit, this._game.sync.serverTimeBys)) {
-                        if (qifu_index && posIdx == qifu_index) {
-                            Laya.timer.once(2500, this, () => {
-                                viewPlayer.view_icon.img_qifu.visible = true;
-                                viewPlayer.view_icon.img_icon.skin = iconUrl;
-                            })
-                        }
-                    } else {
-                        viewPlayer.view_icon.img_qifu.visible = false;
-                        viewPlayer.view_icon.img_icon.skin = iconUrl;
+                    //祈福成功 头像上就有动画
+                    if (qifu_index && posIdx == qifu_index) {
+                        viewPlayer.qifu_type.visible = true;
+                        viewPlayer.qifu_type.skin = this._qifuTypeImgUrl;
+                        //时间戳变化 才加上祈福标志
+                        this.playTween(viewPlayer.qifu_type, qifu_index);
+                        Laya.timer.once(2500, this, () => {
+                            viewPlayer.img_qifu.visible = true;
+                            viewPlayer.img_head.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg(), 2);
+                        })
+                    }
+                    else {
+                        viewPlayer.img_qifu.visible = TongyongUtil.getIsHaveQiFu(unit, this._game.sync.serverTimeBys);
+                        viewPlayer.img_head.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg(), 2);
                     }
                 }
             }
@@ -719,7 +722,7 @@ module gametbniuniu.page {
                     break;
                 case MAP_STATUS.PLAY_STATUS_BET:// 下注阶段
                     this._pageHandle.pushClose({ id: TbniuniuPageDef.PAGE_TBNIUNIU_BEGIN, parent: this._game.uiRoot.HUD });
-                    this._viewUI.txt_status.text = "开始下注";
+                    this._viewUI.txt_status.text = "请选择下注倍数";
 
                     Laya.timer.once(1500, this, () => {
                         if (this._niuMgr.isTuoGuan > 0) {//托管
@@ -811,7 +814,7 @@ module gametbniuniu.page {
                     this._game.uiRoot.general.open(DatingPageDef.PAGE_QIFU)
                     break;
                 case this._viewUI.btn_tanpai://摊牌
-                    this._viewUI.txt_tips.text = "等待其他玩家摊牌";
+                    this._viewUI.txt_tips.text = "请等待其他玩家摊牌";
                     this._game.network.call_tbniuniu_showcard();
                     this._niuMgr.gaipai();
                     this._viewUI.btn_tanpai.visible = false;
@@ -857,7 +860,7 @@ module gametbniuniu.page {
                     this._viewUI.box_betRate.visible = false;
                     this._viewUI.box_tips.visible = true;
                     this._niuMgr.isTuoGuan = 0;
-                    this._viewUI.txt_tips.text = "等待其他玩家下注";
+                    this._viewUI.txt_tips.text = "请等待其他玩家下注";
                     break;
                 case this._viewUI.btn_betRate2://下注倍率2
                     this._game.network.call_tbniuniu_bet(2);
@@ -865,7 +868,7 @@ module gametbniuniu.page {
                     this._viewUI.box_betRate.visible = false;
                     this._viewUI.box_tips.visible = true;
                     this._niuMgr.isTuoGuan = 0;
-                    this._viewUI.txt_tips.text = "等待其他玩家下注";
+                    this._viewUI.txt_tips.text = "请等待其他玩家下注";
                     break;
                 case this._viewUI.btn_betRate3://下注倍率3
                     this._game.network.call_tbniuniu_bet(3);
@@ -873,7 +876,7 @@ module gametbniuniu.page {
                     this._viewUI.box_betRate.visible = false;
                     this._viewUI.box_tips.visible = true;
                     this._niuMgr.isTuoGuan = 0;
-                    this._viewUI.txt_tips.text = "等待其他玩家下注";
+                    this._viewUI.txt_tips.text = "请等待其他玩家下注";
                     break;
                 case this._viewUI.btn_betRate4://下注倍率4
                     this._game.network.call_tbniuniu_bet(4);
@@ -881,7 +884,7 @@ module gametbniuniu.page {
                     this._viewUI.box_betRate.visible = false;
                     this._viewUI.box_tips.visible = true;
                     this._niuMgr.isTuoGuan = 0;
-                    this._viewUI.txt_tips.text = "等待其他玩家下注";
+                    this._viewUI.txt_tips.text = "请等待其他玩家下注";
                     break;
                 case this._viewUI.btn_betRate5://下注倍率5
                     this._game.network.call_tbniuniu_bet(5);
@@ -889,7 +892,7 @@ module gametbniuniu.page {
                     this._viewUI.box_betRate.visible = false;
                     this._viewUI.box_tips.visible = true;
                     this._niuMgr.isTuoGuan = 0;
-                    this._viewUI.txt_tips.text = "等待其他玩家下注";
+                    this._viewUI.txt_tips.text = "请等待其他玩家下注";
                     break;
                 case this._viewUI.btn_tuoguan://托管
                     if (this._niuMgr.isTuoGuan > 0) {

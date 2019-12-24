@@ -54,14 +54,14 @@ module gametbniuniu {
                 space: -4
             };
 
-             //倍数
+            //倍数
             this.BEI_FONT = {
                 source: PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
                 url: PathGameTongyong.ui_tongyong_general + 'clip_bs.png',
-                clipWidth: 32,
-                clipHeight: 41,
-                clipX: 10,
-                space: -18
+                clipWidth: 20,
+                clipHeight: 28,
+                clipX: 11,
+                space: 0
             };
         }
         private _clip: ClipCell;
