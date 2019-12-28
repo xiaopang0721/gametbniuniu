@@ -127,6 +127,7 @@ module gametbniuniu.page {
             this._game.qifuMgr.on(QiFuMgr.QIFU_FLY, this, this.qifuFly);
 
             this.onUpdateUnitOffline();
+            this.initBeiClip();
         }
 
         protected layout(): void {
@@ -143,6 +144,32 @@ module gametbniuniu.page {
                     this._viewUI.box_room_left.left = 105;
                     this._viewUI.box_top_right.right = 28;
                     this._viewUI.box_bottom_right.right = 12;
+                }
+            }
+        }
+
+        //倍数
+        private _beiClip1: TbniuniuClip;
+        private _beiClip2: TbniuniuClip;
+        private _beiClip3: TbniuniuClip;
+        private _beiClip4: TbniuniuClip;
+        initBeiClip(): void {
+            for (let i = 1; i < 6; i++) {
+                this["_beiClip" + i] = new TbniuniuClip(TbniuniuClip.BEI_FONT);
+                this["_beiClip" + i].centerX = this._viewUI["clip_betRate" + i].centerX;
+                this["_beiClip" + i].centerY = this._viewUI["clip_betRate" + i].centerY;
+                this._viewUI["clip_betRate" + i].parent.addChild(this["_beiClip" + i]);
+                this._viewUI["clip_betRate" + i].visible = false;
+                this["_beiClip" + i].setText(i, true, false, "", PathGameTongyong.ui_tongyong_general + "tu_bei.png");
+            }
+        }
+
+        clearBeiClip(): void {
+            for (let i = 1; i < 6; i++) {
+                if (this["_beiClip" + i]) {
+                    this["_beiClip" + i].removeSelf();
+                    this["_beiClip" + i].destroy();
+                    this["_beiClip" + i] = null;
                 }
             }
         }
@@ -351,18 +378,18 @@ module gametbniuniu.page {
                     }
                     //祈福成功 头像上就有动画
                     if (qifu_index && posIdx == qifu_index) {
-                        viewPlayer.qifu_type.visible = true;
-                        viewPlayer.qifu_type.skin = this._qifuTypeImgUrl;
+                        viewPlayer.view_icon.qifu_type.visible = true;
+                        viewPlayer.view_icon.qifu_type.skin = this._qifuTypeImgUrl;
                         //时间戳变化 才加上祈福标志
                         this.playTween(viewPlayer.qifu_type, qifu_index);
                         Laya.timer.once(2500, this, () => {
-                            viewPlayer.img_qifu.visible = true;
-                            viewPlayer.img_head.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg(), 2);
+                            viewPlayer.view_icon.img_qifu.visible = true;
+                            viewPlayer.view_icon.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg(), 2);
                         })
                     }
                     else {
-                        viewPlayer.img_qifu.visible = TongyongUtil.getIsHaveQiFu(unit, this._game.sync.serverTimeBys);
-                        viewPlayer.img_head.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg(), 2);
+                        viewPlayer.view_icon.img_qifu.visible = TongyongUtil.getIsHaveQiFu(unit, this._game.sync.serverTimeBys);
+                        viewPlayer.view_icon.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg(), 2);
                     }
                 }
             }
@@ -630,7 +657,7 @@ module gametbniuniu.page {
             playerIcon.img_di.visible = false;
             //飘字
             clip_money.setText(Math.abs(value), true, false, preSkin);
-            clip_money.centerX = playerIcon.clip_money.centerX;
+            clip_money.centerX = playerIcon.clip_money.centerX - 4;
             clip_money.centerY = playerIcon.clip_money.centerY;
             playerIcon.clip_money.parent.addChild(clip_money);
             this._clipList.push(clip_money);
@@ -639,7 +666,7 @@ module gametbniuniu.page {
             playerIcon.box_clip.y = 57;
             playerIcon.box_clip.visible = true;
             Laya.Tween.clearAll(playerIcon.box_clip);
-            Laya.Tween.to(playerIcon.box_clip, { y: playerIcon.box_clip.y - 50 }, 1000);
+            Laya.Tween.to(playerIcon.box_clip, { y: playerIcon.box_clip.y - 55 }, 700);
             //赢钱动画
             playerIcon.effWin.visible = value > 0;
             value > 0 && playerIcon.effWin.ani1.play(0, false);
@@ -1014,15 +1041,15 @@ module gametbniuniu.page {
                 this._room_config = ROOM_CONFIG[this._niuStory.maplv];
                 let str = "";
                 if (this._niuStory.maplv == Web_operation_fields.GAME_ROOM_CONFIG_TBNIUNIU_1) {
-                    this._viewUI.txt_roomtype.text = "房间：新手场";
+                    str = "房间：新手场";
                 } else if (this._niuStory.maplv == Web_operation_fields.GAME_ROOM_CONFIG_TBNIUNIU_2) {
-                    this._viewUI.txt_roomtype.text = "房间：小资场";
+                    str = "房间：小资场";
                 } else if (this._niuStory.maplv == Web_operation_fields.GAME_ROOM_CONFIG_TBNIUNIU_3) {
-                    this._viewUI.txt_roomtype.text = "房间：老板场";
+                    str = "房间：老板场";
                 } else if (this._niuStory.maplv == Web_operation_fields.GAME_ROOM_CONFIG_TBNIUNIU_4) {
-                    this._viewUI.txt_roomtype.text = "房间：富豪场";
+                    str = "房间：富豪场";
                 }
-                this._viewUI.txt_difen.text = "底注：" + this._room_config[0];
+                this._viewUI.txt_roomtype.text = str + "  底注：" + this._room_config[0];
                 this.onUpdateBetBtn();
             }
         }
