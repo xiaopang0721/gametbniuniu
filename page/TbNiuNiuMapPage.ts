@@ -572,7 +572,7 @@ module gametbniuniu.page {
         }
 
         //设置牌型组件，传入组件和牌型
-        private setCardType(view: ui.ajqp.game_ui.mpniuniu.component.NiuPaiUI, cardType: number, isplay: Boolean): void {
+        private setCardType(view: ui.ajqp.game_ui.tbniuniu.component.NiuPaiUI, cardType: number, isplay: Boolean): void {
             let type: number = 0;//默认没牛
             if (cardType == 0) {//没牛
                 isplay && view.ani0.play(0, false);
