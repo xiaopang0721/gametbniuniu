@@ -543,8 +543,6 @@ module gametbniuniu.page {
             }
             if (info.SettleVal > 0) {
                 this._winnerIndex = this.getUnitUIPos(info.SeatIndex);
-                // this._playerList[this._winnerIndex].view_icon.winner.visible = true;
-                // this._playerList[this._winnerIndex].view_icon.winner.ani1.play(0, false);
             }
             this._settleInfo.push(parseFloat(info.SeatIndex));
             this._settleInfo.push(parseFloat(info.SettleVal));
@@ -1013,7 +1011,6 @@ module gametbniuniu.page {
                 this._playerList[i].box_rate.visible = false;
                 this._playerList[i].view_icon.clip_money.visible = false;
                 this._playerList[i].view_icon.effWin.visible = false;
-                this._playerList[i].view_icon.winner.visible = false;
                 if (i > 0) {
                     this._playerList[i].box_cardType.visible = false;
                 }
@@ -1060,7 +1057,6 @@ module gametbniuniu.page {
                 this._playerList[i].box_rate.visible = false;
                 this._playerList[i].view_icon.clip_money.visible = false;
                 this._playerList[i].view_icon.effWin.visible = false;
-                this._playerList[i].view_icon.winner.visible = false;
                 if (i > 0) {
                     this._playerList[i].visible = false;
                     this._playerList[i].box_cardType.visible = false;
