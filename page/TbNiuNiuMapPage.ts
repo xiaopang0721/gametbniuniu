@@ -136,12 +136,12 @@ module gametbniuniu.page {
                 //全面屏
                 if (this._game.isFullScreen) {
                     this._viewUI.box_top_left.left = 14 + 56;
-                    this._viewUI.box_room_left.left = 105 + 56;
+                    this._viewUI.box_room_left.left = 115 + 56;
                     this._viewUI.box_top_right.right = 28 + 56;
                     this._viewUI.box_bottom_right.right = 12 + 56;
                 } else {
                     this._viewUI.box_top_left.left = 14;
-                    this._viewUI.box_room_left.left = 105;
+                    this._viewUI.box_room_left.left = 115;
                     this._viewUI.box_top_right.right = 28;
                     this._viewUI.box_bottom_right.right = 12;
                 }
@@ -241,7 +241,7 @@ module gametbniuniu.page {
             this._viewUI.btn_tuoguan.skin = this._niuMgr.isTuoGuan > 0 ? Path_game_tbniuniu.ui_tbniuniu + "btn_tg1.png" : Path_game_tbniuniu.ui_tbniuniu + "btn_tg0.png";
             if (this._niuMgr.isTuoGuan == 0) return;
             if (this._niuMapInfo && this._curStatus == MAP_STATUS.PLAY_STATUS_SHOW_GAME) {
-                if (this._game.sceneObjectMgr.mainPlayer.GetMoney() / 100 < this._room_config[1]) {
+                if (TongyongUtil.getMoneyChange(this._game.sceneObjectMgr.mainPlayer.GetMoney()) < this._room_config[1]) {
                     TongyongPageDef.ins.alertRecharge(StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", this._room_config[1]), () => {
                         this._game.uiRoot.general.open(DatingPageDef.PAGE_CHONGZHI);
                     }, () => {
@@ -328,7 +328,7 @@ module gametbniuniu.page {
                     this._viewUI.view0.view_icon.img_vip.visible = mPlayer.playerInfo.vip_level > 0;
                     this._viewUI.view0.view_icon.img_vip.skin = TongyongUtil.getVipUrl(mPlayer.playerInfo.vip_level);
                 } else {
-                    money = unitOffline.GetMoney();
+                    money = TongyongUtil.getMoneyChange(unitOffline.GetMoney());
                     this._viewUI.view0.view_icon.txt_name.text = getMainPlayerName(unitOffline.GetName());
                     this._viewUI.view0.view_icon.img_icon.skin = TongyongUtil.getHeadUrl(unitOffline.GetHeadImg(), 2);
                     this._viewUI.view0.view_icon.img_qifu.visible = TongyongUtil.getIsHaveQiFu(unitOffline, this._game.sync.serverTimeBys);
@@ -435,7 +435,7 @@ module gametbniuniu.page {
                 let unit = this._game.sceneObjectMgr.getUnitByIdx(posIdx);
                 this._playerList[index].visible = unit;
                 if (unit) {
-                    let money = EnumToString.getPointBackNum(unit.GetMoney(), 2).toString();
+                    let money = EnumToString.getPointBackNum(TongyongUtil.getMoneyChange(unit.GetMoney()), 2).toString();
                     this._playerList[index].view_icon.txt_money.text = money;
                 }
             }
@@ -793,7 +793,7 @@ module gametbniuniu.page {
                     });
                     break;
                 case MAP_STATUS.PLAY_STATUS_SHOW_GAME:// 本局展示阶段
-                    if (this._room_config && this._game.sceneObjectMgr.mainPlayer.GetMoney() / 100 < this._room_config[1]) {
+                    if (this._room_config && TongyongUtil.getMoneyChange(this._game.sceneObjectMgr.mainPlayer.GetMoney()) < this._room_config[1]) {
                         TongyongPageDef.ins.alertRecharge(StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", this._room_config[1]), () => {
                             this._game.uiRoot.general.open(DatingPageDef.PAGE_CHONGZHI);
                         }, () => {
@@ -863,7 +863,7 @@ module gametbniuniu.page {
                 case this._viewUI.btn_continue://继续游戏
                     if (this._room_config) {
                         let mainPlayer = this._game.sceneObjectMgr.mainPlayer;
-                        if (mainPlayer && mainPlayer.GetMoney() / 100 < this._room_config[1]) {
+                        if (mainPlayer && TongyongUtil.getMoneyChange(mainPlayer.GetMoney()) < this._room_config[1]) {
                             TongyongPageDef.ins.alertRecharge(StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", this._room_config[1]), () => {
                                 this._game.uiRoot.general.open(DatingPageDef.PAGE_CHONGZHI);
                             }, () => {
@@ -925,7 +925,7 @@ module gametbniuniu.page {
                     } else {
                         if (this._niuMapInfo && this._room_config) {
                             let mainPlayer = this._game.sceneObjectMgr.mainPlayer;
-                            if (mainPlayer && mainPlayer.GetMoney() / 100 < this._room_config[1]) {
+                            if (mainPlayer && TongyongUtil.getMoneyChange(mainPlayer.GetMoney()) < this._room_config[1]) {
                                 TongyongPageDef.ins.alertRecharge(StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", this._room_config[1]), () => {
                                     this._game.uiRoot.general.open(DatingPageDef.PAGE_CHONGZHI);
                                 }, () => {
