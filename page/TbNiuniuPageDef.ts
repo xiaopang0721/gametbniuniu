@@ -48,7 +48,6 @@ module gametbniuniu.page {
                 PathGameTongyong.atlas_game_ui_tongyong_general + "anniu.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong_general_effect + "anniug.atlas",
 
-				PathGameTongyong.atlas_game_ui_tongyong_general + "icon_money.png",
 				Path.custom_atlas_scene + 'card.atlas',
 				Path.map + 'pz_tbniuniu.png',
 				Path.map_far + 'bg_tbniuniu.jpg'
