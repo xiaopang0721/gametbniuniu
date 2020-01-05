@@ -28,7 +28,6 @@ module gametbniuniu.page {
 			PageDef._pageClassMap[TbniuniuPageDef.PAGE_TBNIUNIU_TUOGUAN] = TbNiuNiuTuoGuanPage;
 
 			this["__needLoadAsset"] = [
-				DatingPath.atlas_dating_ui + "qifu.atlas",
                 Path_game_tbniuniu.atlas_game_ui + "tbniuniu.atlas",
                 Path_game_tbniuniu.atlas_game_ui_tbniuniu + "qp.atlas",
                 Path_game_tbniuniu.atlas_game_ui_tbniuniu + "niupai.atlas",
